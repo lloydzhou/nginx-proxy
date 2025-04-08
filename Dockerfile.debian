@@ -29,7 +29,13 @@ COPY --from=docker-gen /usr/local/bin/docker-gen /usr/local/bin/docker-gen
 
 COPY network_internal.conf /etc/nginx/
 
-COPY app nginx.tmpl upstream.tmpl global.tmpl LICENSE /app/
+COPY app /app
+
+COPY nginx.tmpl upstream.tmpl global.tmpl /tmp
+
+RUN cat /tmp/global.tmpl /tmp/nginx.tmpl > /app/nginx.tmpl \
+    && cat /tmp/global.tmpl /tmp/upstream.tmpl > /app/upstream.tmpl
+
 WORKDIR /app/
 
 ENTRYPOINT ["/app/docker-entrypoint.sh"]
