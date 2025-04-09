@@ -1,3 +1,2 @@
-upstream: docker-gen -watch -notify "nginx -s reload" "/app/upstream.tmpl;/app/common.tmpl" /etc/nginx/conf.d/10-upstream.conf
-dockergen: docker-gen -watch -notify "nginx -s reload" "/app/nginx.tmpl;/app/common.tmpl" /etc/nginx/conf.d/default.conf
+dockergen: docker-gen -config /app/dockergen.conf
 nginx: nginx -g "daemon off;"

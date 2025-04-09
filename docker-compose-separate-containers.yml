@@ -12,11 +12,10 @@ services:
 
   dockergen:
     image: nginxproxy/docker-gen
-    command: -notify-sighup nginx -watch "/etc/docker-gen/templates/nginx.tmpl;/etc/docker-gen/templates/common.tmpl" /etc/nginx/conf.d/default.conf
+    command: -f /app/dockergen.conf
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
-      - ./nginx.tmpl:/etc/docker-gen/templates/nginx.tmpl
-      - ./common.tmpl:/etc/docker-gen/templates/common.tmpl
+      - ./app:/app
       - nginx_conf:/etc/nginx/conf.d
 
   whoami:

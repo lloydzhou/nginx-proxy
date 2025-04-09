@@ -1142,8 +1142,8 @@ Then start the docker-gen container with the shared volume and template:
 ```console
 docker run --volumes-from nginx \
     -v /var/run/docker.sock:/tmp/docker.sock:ro \
-    -v $(pwd):/etc/docker-gen/templates \
-    -t nginxproxy/docker-gen -notify-sighup nginx -watch "/etc/docker-gen/templates/nginx.tmpl;/etc/docker-gen/templates/common.tmpl" /etc/nginx/conf.d/default.conf
+    -v $(pwd)/app:/app \
+    -t nginxproxy/docker-gen -config /app/dockergen.conf
 ```
 
 Finally, start your containers with `VIRTUAL_HOST` environment variables.
