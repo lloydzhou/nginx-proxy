@@ -14,7 +14,8 @@ services:
 
   nginx-proxy-dockergen:
     image: nginxproxy/docker-gen
-    command: -config /app/dockergen.conf
+    entrypoint: /usr/local/bin/docker-gen
+    command: -config /app/dockergen.conf -notify-sighup nginx
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
       - ../../app:/app
